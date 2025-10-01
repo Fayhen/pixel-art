@@ -46,6 +46,28 @@ h1, h2 {
     border: 1px solid #ccc;
     background-color: #f9f9f9;
     cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.tools button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.current-color-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.current-color {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    background-color: #000000;
 }
 
 .color-palette {
@@ -59,6 +81,13 @@ h1, h2 {
     height: 30px;
     border: 1px solid #ccc;
     cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.color:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 #pixel-canvas {
@@ -76,6 +105,12 @@ h1, h2 {
     background-color: white;
     border: 1px solid #ddd;
     cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.pixel:hover {
+    border-color: #999;
+    transform: scale(1.05);
 }
 
 footer {
