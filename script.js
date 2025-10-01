@@ -12,6 +12,7 @@ const tools = document.querySelectorAll('.tools button');
 document.addEventListener('DOMContentLoaded', function () {
   initializeCanvas();
   setupEventListeners();
+  initializeUI();
 });
 
 // Criar canvas de pixels
@@ -30,7 +31,7 @@ function setupEventListeners() {
   colorPalette.forEach(color => {
     color.addEventListener('click', function () {
       currentColor = this.dataset.color;
-      updateSelectedColor();
+      updateSelectedColor(this);
     });
   });
 
@@ -54,12 +55,14 @@ function startDrawing(e) {
   if (e.target.classList.contains('pixel')) {
     isDrawing = true;
     drawPixel(e.target);
+    e.preventDefault(); // Prevenir seleção de texto
   }
 }
 
 function draw(e) {
   if (isDrawing && e.target.classList.contains('pixel')) {
     drawPixel(e.target);
+    e.preventDefault(); // Prevenir seleção de texto
   }
 }
 
@@ -70,24 +73,48 @@ function stopDrawing() {
 function drawPixel(pixel) {
   if (currentTool === 'pencil') {
     pixel.style.backgroundColor = currentColor;
+    pixel.style.borderColor = currentColor;
   } else if (currentTool === 'eraser') {
     pixel.style.backgroundColor = 'white';
+    pixel.style.borderColor = '#ddd';
   }
   // fill-tool será implementado futuramente
 }
 
 // Atualizar interface
-function updateSelectedColor() {
+function updateSelectedColor(selectedColorElement) {
   colorPalette.forEach(color => {
     color.style.border = '1px solid #ccc';
+    color.style.transform = 'scale(1)';
   });
-  event.target.style.border = '3px solid #333';
+  selectedColorElement.style.border = '3px solid #333';
+  selectedColorElement.style.transform = 'scale(1.1)';
+
+  // Atualizar preview da cor atual
+  const currentColorPreview = document.getElementById('current-color-preview');
+  if (currentColorPreview) {
+    currentColorPreview.style.backgroundColor = currentColor;
+  }
 }
 
 function updateSelectedTool() {
   tools.forEach(tool => {
     tool.style.backgroundColor = '#f9f9f9';
+    tool.style.color = '#333';
+    tool.style.transform = 'scale(1)';
   });
-  document.getElementById(currentTool + '-tool').style.backgroundColor = '#007bff';
-  document.getElementById(currentTool + '-tool').style.color = 'white';
+  const selectedTool = document.getElementById(currentTool + '-tool');
+  selectedTool.style.backgroundColor = '#007bff';
+  selectedTool.style.color = 'white';
+  selectedTool.style.transform = 'scale(1.05)';
+}
+
+// Inicializar interface
+function initializeUI() {
+  // Selecionar primeira cor por padrão
+  const firstColor = colorPalette[0];
+  updateSelectedColor(firstColor);
+
+  // Selecionar primeira ferramenta por padrão
+  updateSelectedTool();
 }
