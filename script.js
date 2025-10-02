@@ -7,6 +7,7 @@ let isDrawing = false;
 const canvas = document.getElementById('pixel-canvas');
 const colorPalette = document.querySelectorAll('.color');
 const tools = document.querySelectorAll('.tools button');
+const clearBtn = document.getElementById('clear-btn');
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function () {
@@ -48,6 +49,11 @@ function setupEventListeners() {
   canvas.addEventListener('mousemove', draw);
   canvas.addEventListener('mouseup', stopDrawing);
   canvas.addEventListener('mouseleave', stopDrawing);
+
+  // Botão limpar
+  if (clearBtn) {
+    clearBtn.addEventListener('click', clearCanvas);
+  }
 }
 
 // Funções de desenho
@@ -117,4 +123,13 @@ function initializeUI() {
 
   // Selecionar primeira ferramenta por padrão
   updateSelectedTool();
+}
+
+// Função para limpar o canvas
+function clearCanvas() {
+  const pixels = canvas.querySelectorAll('.pixel');
+  pixels.forEach(pixel => {
+    pixel.style.backgroundColor = 'white';
+    pixel.style.borderColor = '#ddd';
+  });
 }
