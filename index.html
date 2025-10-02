@@ -11,6 +11,9 @@
 <body>
   <header>
     <h1>Pixel Art</h1>
+    <div class="header-controls">
+      <button id="theme-toggle" class="theme-toggle" title="Alternar tema">🌓</button>
+    </div>
   </header>
 
   <main>
@@ -51,19 +54,32 @@
       </section>
 
       <section class="canvas-section">
-        <h2>Seu Canvas Interativo</h2>
-        <div id="pixel-canvas">
-          <!-- Canvas será gerado via JavaScript -->
+        <div class="canvas-header">
+          <h2>Seu Canvas Interativo</h2>
+          <div class="canvas-controls">
+            <button id="grid-toggle" title="Mostrar/Ocultar Grade">🔲</button>
+            <button id="zoom-out" title="Diminuir Zoom">🔍-</button>
+            <span id="zoom-level">100%</span>
+            <button id="zoom-in" title="Aumentar Zoom">🔍+</button>
+          </div>
+        </div>
+        <div id="canvas-container">
+          <div id="pixel-canvas">
+            <!-- Canvas será gerado via JavaScript -->
+          </div>
         </div>
       </section>
 
       <section class="tools-section">
         <h2>Ferramentas</h2>
         <div class="tools">
-          <button id="pencil-tool">Lápis</button>
-          <button id="eraser-tool">Borracha</button>
-          <button id="fill-tool">Preenchimento</button>
-          <button>Pintar Tudo</button>
+          <button id="pencil-tool" data-key="p">Lápis (P)</button>
+          <button id="eraser-tool" data-key="e">Borracha (E)</button>
+          <button id="fill-tool" data-key="f">Preenchimento (F)</button>
+          <button id="clear-tool" data-key="c">Limpar Tudo (C)</button>
+        </div>
+        <div class="tool-info">
+          <p><strong>Atalhos:</strong> P = Lápis, E = Borracha, F = Preenchimento, C = Limpar</p>
         </div>
       </section>
 
